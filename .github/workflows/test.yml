@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
         
     # Connect or Create the Azure Machine Learning Workspace
-    - name: Connect/Create Azure Machine Learning Workspace
+    - name: deploy all resources
       id: aml_configure
       uses: ./
       with:
