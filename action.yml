@@ -1,0 +1,28 @@
+name: "Azure Machine Learning Run Action"
+description: "Submit a run to an Azure Machine Learning Workspace with this GitHub Action"
+author: "azure/gh-aml"
+inputs:
+  azure_credentials:
+    description: "Paste output of `az ad sp create-for-rbac --name <your-sp-name> --role contributor --scopes /subscriptions/<your-subscriptionId>/resourceGroups/<your-rg> --sdk-auth` as value of secret variable: AZURE_CREDENTIALS"
+    required: true
+  armtemplate_file:
+    description: "JSON file of am template to deploy."
+    required: true
+    default: "deploy.json"
+  armtemplateparams_file:
+    description: "JSON file of am template to params deploy."
+    required: true
+    default: "deploy.params.json"
+  resource_group:
+    description: "resource group which is to be used"
+    required: true
+    default: "newresource_grp"    
+outputs:
+  experiment_name:
+    description: "Name of the experiment of the run"
+branding:
+  icon: "chevron-up"
+  color: "blue"
+runs:
+  using: "docker"
+  image: "Dockerfile"

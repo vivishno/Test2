@@ -1,0 +1,26 @@
+# Test Actions train a model on Azure Machine Learning
+name: aml-train-deploy-workflow 
+on:
+  push:
+    branches:
+      - master
+    # paths:
+    #   - 'code/*'
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Check Out Repository
+      id: checkout_repository
+      uses: actions/checkout@v2
+        
+    # Connect or Create the Azure Machine Learning Workspace
+    - name: Connect/Create Azure Machine Learning Workspace
+      id: aml_configure
+      uses: ./
+      with:
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          armtemplate_file: "deploy.json"
+          armtemplateparams_file: "deploy.params.json"
+          resource_group: "ashkuma_functionAppRsGroup"
