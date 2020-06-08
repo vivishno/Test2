@@ -64,8 +64,11 @@ def main():
     service_principal_password=azure_credentials.get("clientSecret", "")
     command = ('az login --service-principal --username {APP_ID} --password "{PASSWORD}" --tenant "{TENANT_ID}" -o json').format(
             APP_ID=service_principal_id, PASSWORD=service_principal_password, TENANT_ID=tenant_id)
-
-    app_create = subprocess.check_output(command, shell=True)
+    try:
+        app_create = subprocess.check_output(command, shell=True)
+        print(app_create)
+    except Exception as ex:
+        print(ex)
     print(deploy_functionApp(template_file_file_path ,template_params_file_path , resource_group))
     
 
