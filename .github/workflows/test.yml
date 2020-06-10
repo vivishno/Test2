@@ -11,9 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
     - name: Check Out Repository
       id: checkout_repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v1
         
     # Connect or Create the Azure Machine Learning Workspace
     - name: deploy all resources
