@@ -26,15 +26,17 @@ def deploy_functionApp(template_path, parameters_file_path,resource_group):
     
 def main():
     # # Loading input values
-    # print("::debug::Loading input values")
+    print("::debug::Loading input values")
+    
     template_file = os.environ.get("INPUT_ARMTEMPLATE_FILE", default="deploy.json")
     template_params_file = os.environ.get("INPUT_ARMTEMPLATEPARAMS_FILE", default="deploy.params.json")
     azure_credentials = os.environ.get("INPUT_AZURE_CREDENTIALS", default="{}")
     resource_group = os.environ.get("INPUT_RESOURCE_GROUP", default="newresource_group")
     print("0--------------------------------------")
-    print(azure_credentials)
+
     try:
         azure_credentials = json.loads(azure_credentials)
+        print(azure_credentials)
     except JSONDecodeError:
         print("::error::Please paste output of `az ad sp create-for-rbac --name <your-sp-name> --role contributor --scopes /subscriptions/<your-subscriptionId>/resourceGroups/<your-rg> --sdk-auth` as value of secret variable: AZURE_CREDENTIALS")
         raise AMLConfigurationException(f"Incorrect or poorly formed output from azure credentials saved in AZURE_CREDENTIALS secret. See setup in https://github.com/Azure/aml-workspace/blob/master/README.md")
