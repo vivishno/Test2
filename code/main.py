@@ -31,13 +31,14 @@ def main():
     template_params_file = os.environ.get("INPUT_ARMTEMPLATEPARAMS_FILE", default="deploy.params.json")
     azure_credentials = os.environ.get("INPUT_AZURE_CREDENTIALS", default="{}")
     resource_group = os.environ.get("INPUT_RESOURCE_GROUP", default="newresource_group")
+    print("0--------------------------------------")
 
     try:
         azure_credentials = json.loads(azure_credentials)
     except JSONDecodeError:
         print("::error::Please paste output of `az ad sp create-for-rbac --name <your-sp-name> --role contributor --scopes /subscriptions/<your-subscriptionId>/resourceGroups/<your-rg> --sdk-auth` as value of secret variable: AZURE_CREDENTIALS")
         raise AMLConfigurationException(f"Incorrect or poorly formed output from azure credentials saved in AZURE_CREDENTIALS secret. See setup in https://github.com/Azure/aml-workspace/blob/master/README.md")
-
+    print("1--------------------------------------")
     # Checking provided parameters
     print("::debug::Checking provided parameters")
     required_parameters_provided(
@@ -45,6 +46,7 @@ def main():
         keys=["tenantId", "clientId", "clientSecret"],
         message="Required parameter(s) not found in your azure credentials saved in AZURE_CREDENTIALS secret for logging in to the workspace. Please provide a value for the following key(s): "
     )
+    print("2--------------------------------------")
 
     # Mask values
     print("::debug::Masking parameters")
@@ -52,16 +54,19 @@ def main():
     mask_parameter(parameter=azure_credentials.get("clientId", ""))
     mask_parameter(parameter=azure_credentials.get("clientSecret", ""))
     mask_parameter(parameter=azure_credentials.get("subscriptionId", ""))
-    
+    print("3--------------------------------------")
+
     # Loading parameters file
     print("::debug::Loading parameters file")
     template_file_file_path = os.path.join(".cloud", ".azure", template_file)
     template_params_file_path = os.path.join(".cloud", ".azure", template_params_file)
+    print("4--------------------------------------")
 
 
     tenant_id=azure_credentials.get("tenantId", "")
     service_principal_id=azure_credentials.get("clientId", "")
     service_principal_password=azure_credentials.get("clientSecret", "")
+    print("5--------------------------------------")
     
     command = ('az login --service-principal --username {APP_ID} --password {PASSWORD} --tenant {TENANT_ID}').format(
             APP_ID=service_principal_id, PASSWORD=service_principal_password, TENANT_ID=tenant_id)
