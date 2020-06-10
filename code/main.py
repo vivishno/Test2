@@ -32,6 +32,7 @@ def main():
     template_params_file = os.environ.get("INPUT_ARMTEMPLATEPARAMS_FILE", default="deploy.params.json")
     azure_credentials = os.environ.get("INPUT_AZURE_CREDENTIALS", default="{}")
     resource_group = os.environ.get("INPUT_RESOURCE_GROUP", default="newresource_group")
+    print(azure_credentials)
     print("0--------------------------------------")
 
     try:
