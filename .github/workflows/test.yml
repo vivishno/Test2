@@ -5,7 +5,7 @@ on:
     branches:
       - master
     # paths:
-    #   - 'code/*'
+    #   -'code/*'
 jobs:
   train:
     runs-on: ubuntu-latest
