@@ -32,7 +32,7 @@ def main():
     azure_credentials = os.environ.get("INPUT_AZURE_CREDENTIALS", default="{}")
     resource_group = os.environ.get("INPUT_RESOURCE_GROUP", default="newresource_group")
     print("0--------------------------------------")
-
+    print(azure_credentials)
     try:
         azure_credentials = json.loads(azure_credentials)
     except JSONDecodeError:
