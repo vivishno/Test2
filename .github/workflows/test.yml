@@ -9,5 +9,5 @@ jobs:
     - uses: Azure/docker-login@v1
       with:
         login-server: acrc2zegvu7zemng.azurecr.io
-        username: acrc2zegvu7zemng
+        username: acrc2zegvu7zemnga
         password: fmdPwgET16HQLz3OWzu9QG=jifqduJ7e
