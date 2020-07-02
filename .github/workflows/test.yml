@@ -13,7 +13,7 @@ jobs:
         password: fmdPwgET16HQLz3OWzu9QG=jifqduJ7e
           
     - run: |
-        docker tag Dockerfile acrc2zegvu7zemng.azurecr.io/myDocker
+        docker tag dockerfile acrc2zegvu7zemng.azurecr.io/myDocker
         docker push acrc2zegvu7zemng.azurecr.io/myDocker
         
       
