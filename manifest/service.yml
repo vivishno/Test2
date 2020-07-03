@@ -7,4 +7,3 @@ spec:
     app: myapp
   ports:
   - port:80
-
